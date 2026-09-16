@@ -1,1 +1,4 @@
-include dataset_complexity_profiler/meta_model.pkl
+include src/dataset_complexity_profiler/meta_model.skops
+include src/dataset_complexity_profiler/py.typed
+recursive-include tests *.py
+include LICENSE README.md README_en.md

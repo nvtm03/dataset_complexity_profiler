@@ -1,41 +1,73 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "dataset_complexity_profiler"
-version = "0.1.3"
-description = "Text dataset complexity profiler with a packaged meta-model for automatic embedding dimension recommendation"
+version = "0.3.0"
+description = "Dataset Complexity Profiler: profile text datasets and recommend a compact PCA embedding size"
 readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "MIT"}
-keywords = ["nlp", "meta-learning", "dataset-profiling", "embeddings"]
+license = "MIT"
+keywords = ["nlp", "embeddings", "dataset-profiling", "intrinsic-dimension", "meta-learning"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Typing :: Typed",
+]
 dependencies = [
-  "sentence-transformers>=2.2.2",
-  "datasets>=2.14.5",
-  "pymfe>=0.3.1",
-  "scikit-learn>=1.2.2",
+  "scikit-learn>=1.6.1",
   "numpy>=1.24.0",
   "pandas>=1.5.3",
+  "skops>=0.11.0",
   "joblib>=1.2.0",
+  "scipy>=1.10.0",
 ]
 
+[project.optional-dependencies]
+text = [
+  "sentence-transformers>=2.2.2",
+  "datasets>=2.14.5",
+]
+dev = [
+  "pytest>=7.4.0",
+  "build>=1.0.0",
+  "twine>=6.1.0",
+  "ruff>=0.8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/nvtm03/dataset_complexity_profiler"
+Repository = "https://github.com/nvtm03/dataset_complexity_profiler"
+
+[project.scripts]
+dcp = "dataset_complexity_profiler.cli:main"
+
 [tool.setuptools]
-packages = ["dataset_complexity_profiler"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.setuptools.package-data]
-dataset_complexity_profiler = ["*.pkl"]
+dataset_complexity_profiler = ["*.skops", "py.typed"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["F", "W291", "W293", "I", "E711", "E712", "UP008", "UP009"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-q"
-
-[dependency-groups]
-dev = [
-    "build>=1.4.4",
-    "packaging>=26.2",
-    "pkginfo>=1.12.1.2",
-    "setuptools>=81.0.0",
-    "twine>=6.2.0",
-    "wheel>=0.47.0",
-]
+pythonpath = ["src"]

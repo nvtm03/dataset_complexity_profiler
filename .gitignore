@@ -1,18 +1,61 @@
+# Python
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+*.egg
 *.egg-info/
+.eggs/
 build/
 dist/
 wheels/
+MANIFEST
+
+# Virtualenvs
 .venv/
+venv/
+env/
+ENV/
+
+# Test / type / coverage
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.hypothesis/
 .coverage
+.coverage.*
 coverage.xml
 htmlcov/
+
+# Notebooks / OS / IDE
 .ipynb_checkpoints/
+research/anaconda_projects/
 .DS_Store
+Thumbs.db
 .idea/
 .vscode/
+
+# Secrets and local env
 .env
 .pypirc
+
+# embeddings / HuggingFace
+.cache/
+.huggingface/
+*.npy
+*.npz
+
+PERSONAL_EXPLANATION.md
+logs
+logs2
+new_meta_rows*.csv
+research/training_extra_collect.csv
+research/figures/
+*.bak
+*.orig
+*.log
+holdout_result.json
+ablation_pymfe_groups.json
+benchmarks_*.csv
