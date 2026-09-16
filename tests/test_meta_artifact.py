@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from dataset_complexity_profiler import INTERPRETABLE_FEATURE_NAMES, DatasetProfiler
 from dataset_complexity_profiler.defaults import PACKAGED_META_MODEL_NAME
 from dataset_complexity_profiler.meta_artifact import (
+    SKOPS_TRUSTED_TYPES,
     align_features_by_name,
     load_artifact,
     save_artifact,
@@ -130,6 +131,15 @@ def test_explicit_corrupt_meta_model_path_raises_value_error(tmp_path):
     for name, path in _corrupt_artifacts(tmp_path).items():
         with pytest.raises(ValueError):
             DatasetProfiler(auto_load_meta_model=True, meta_model_path=str(path))
+
+
+def test_packaged_artifact_untrusted_types_are_allowlisted():
+    import skops.io as sio
+
+    path = Path(__file__).resolve().parents[1] / "src/dataset_complexity_profiler" / PACKAGED_META_MODEL_NAME
+    unknown = sio.get_untrusted_types(file=path)
+    extra = sorted(set(unknown) - SKOPS_TRUSTED_TYPES)
+    assert extra == []
 
 
 def test_packaged_artifact_was_saved_with_sklearn_1_6():

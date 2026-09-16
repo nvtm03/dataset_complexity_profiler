@@ -17,6 +17,7 @@ SKOPS_TRUSTED_TYPES: FrozenSet[str] = frozenset(
     {
         "sklearn.ensemble._forest.RandomForestClassifier",
         "sklearn.tree._classes.DecisionTreeClassifier",
+        "sklearn.tree._tree.Tree",
     }
 )
 
